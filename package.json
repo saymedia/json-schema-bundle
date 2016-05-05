@@ -1,0 +1,22 @@
+{
+  "name": "json-schema-bundle",
+  "description": "JSON-Schema bundle",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saymedia/json-schema-bundle.git"
+  },
+  "scripts": {
+    "test": "nodeunit tests",
+    "lint": "jshint lib/ tests/"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jshint": "*",
+    "nodeunit": "*"
+  },
+  "engines": {
+    "node": ">=4.4.1"
+  }
+}

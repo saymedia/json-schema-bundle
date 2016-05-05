@@ -1,0 +1,5 @@
+[project]
+	name = json-schema-bundle
+	type = nodejs-app
+[node]
+	version = 4.4.1
