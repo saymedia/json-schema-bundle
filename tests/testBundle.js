@@ -7,7 +7,6 @@ exports.testSimple = function (test) {
     test.expect(3);
 
     var schema = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -31,7 +30,6 @@ exports.testInternalRef = function (test) {
     test.expect(4);
 
     var schema = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -59,7 +57,6 @@ exports.testExternalRef = function (test) {
     test.expect(4);
 
     var schema = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -76,7 +73,6 @@ exports.testExternalRef = function (test) {
     };
 
     var schemaA = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -104,7 +100,6 @@ exports.testCircular = function (test) {
     test.expect(1);
 
     var schemaS = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -121,7 +116,6 @@ exports.testCircular = function (test) {
     };
 
     var schemaA = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -132,7 +126,6 @@ exports.testCircular = function (test) {
     };
 
     var schemaB = {
-        schemaVersion: 0,
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
