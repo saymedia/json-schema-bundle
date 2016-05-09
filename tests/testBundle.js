@@ -97,9 +97,9 @@ exports.testExternalRef = function (test) {
 
 exports.testCircular = function (test) {
 
-    test.expect(1);
+    test.expect(9);
 
-    var schemaS = {
+    var schema = {
         '$schema': 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         definitions: {
@@ -110,7 +110,7 @@ exports.testCircular = function (test) {
                 '$ref': '#/definitions/foo'
             },
             baz: {
-                '$ref': 'say:objectType/A#/definitions/a'
+                '$ref': 'http://test/A#/definitions/a'
             }
         }
     };
@@ -120,7 +120,7 @@ exports.testCircular = function (test) {
         type: 'object',
         definitions: {
             a: {
-                '$ref': 'say:objectType/B#/definitions'
+                '$ref': 'http://test/B#/definitions'
             }
         }
     };
@@ -133,30 +133,36 @@ exports.testCircular = function (test) {
                 type: 'string'
             },
             c: {
-                '$ref': 'say:objectType/S#/definitions'
+                '$ref': 'http://test#/definitions'
             }
         }
     };
 
-    var b = bundler.bundle('say:objectType/S', schemaS, function (pointer) {
-        if (pointer.url === 'say:objectType/A') {
+    var b = bundler.bundle('http://test', schema, function (pointer) {
+        if (pointer.url === 'http://test') {
+            return schema;
+        }
+        if (pointer.url === 'http://test/A') {
             return schemaA;
         }
-        if (pointer.url === 'say:objectType/B') {
+        if (pointer.url === 'http://test/B') {
             return schemaB;
-        }
-        if (pointer.url === 'say:objectType/S') {
-            return schemaS;
         }
     });
 
-    console.log(JSON.stringify(b, null, '  '));
+    test.ok(b);
+    test.ok(Array.isArray(b));
+    test.ok(b.length === 3);
+    test.ok(b[0].definitions.baz.$ref === '#/1/definitions/a');
+    test.ok(b[2].definitions.c.$ref === '#/0/definitions');
 
     var deref = bundler.derefSchemaBundle(b);
 
-    console.log(deref);
+    test.ok(deref.definitions.foo.type === 'string');
+    test.ok(deref.definitions.bar.type === 'string');
+    test.ok(deref.definitions.baz.b.type === 'string');
+    test.ok(deref.definitions.baz.c === deref.definitions); // circular
 
-    test.ok(1);
     test.done();
 };
 
