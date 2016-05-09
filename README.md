@@ -34,6 +34,13 @@ The JSON-Schema of a bundle would be:
 
 ```
 
+The first schema in the array is the one originally requested. The other schemas
+are the referenced schemas. Note that they are also fully "bundled", which means
+that, like the requested schema, all their dependencies are resolved, and their
+references rewritten. This creates a bundle that could be bigger than the one
+strictly needed for the requested schema, but with the benefit of having all the
+schemas in the array fully resolved and usable.
+
 ## Example
 
 ```javascript
