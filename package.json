@@ -10,13 +10,12 @@
     "test": "nodeunit tests",
     "lint": "jshint lib/ tests/"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "jshint": "*",
     "nodeunit": "*"
   },
   "engines": {
-    "node": ">=4.4.1"
+    "node": ">=14"
   }
 }

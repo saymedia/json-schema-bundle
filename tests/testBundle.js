@@ -11,7 +11,8 @@ exports.testSimple = function (test) {
         type: 'object',
         definitions: {
             foo: {
-                type: 'string',
+                type: ['string', 'null'],
+                enum: ['bar', null],
             }
         }
     };
