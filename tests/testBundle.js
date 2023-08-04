@@ -4,7 +4,7 @@ var bundler = require('../lib/bundler.js');
 
 exports.testSimple = function (test) {
 
-    test.expect(3);
+    test.expect(4);
 
     var schema = {
         '$schema': 'http://json-schema.org/draft-04/schema#',
@@ -22,6 +22,10 @@ exports.testSimple = function (test) {
     test.ok(b);
     test.ok(Array.isArray(b));
     test.ok(b.length === 1);
+
+    var deref = bundler.derefSchemaBundle(b);
+    test.deepEqual(deref.definitions.foo, { type: ['string', 'null'], enum: ['bar', null] });
+
     test.done();
 
 };
